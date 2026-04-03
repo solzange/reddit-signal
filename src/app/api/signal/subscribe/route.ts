@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
 
   const resendKey = process.env.RESEND_API_KEY;
   if (!resendKey) {
-    return NextResponse.json({ ok: true, message: "Subscribed (confirmation email skipped)" });
+    return NextResponse.json({ error: "Email digest is not configured" }, { status: 503 });
   }
 
   const siteUrl = config.siteUrl || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";

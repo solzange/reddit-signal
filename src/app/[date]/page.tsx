@@ -60,6 +60,7 @@ export default async function SignalArchivePage({ params }: Props) {
         initialNextPage={null}
         lastRefresh={snapshot.sourceLastRefresh}
         archiveDate={date}
+        emailSignupEnabled={false}
       />
     </Suspense>
   );

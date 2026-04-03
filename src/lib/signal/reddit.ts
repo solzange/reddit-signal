@@ -56,11 +56,28 @@ export interface FetchAllRedditPostsResult {
   sourcesFromFallback: number;
 }
 
-function proxyUrl(url: string): string {
+function buildFetchTarget(url: string): {
+  url: string;
+  headers: Record<string, string>;
+} {
   const proxy = process.env.REDDIT_PROXY_URL;
-  if (!proxy) return url;
+  const headers: Record<string, string> = {
+    "User-Agent": REDDIT_USER_AGENT,
+  };
+
+  if (!proxy) {
+    return { url, headers };
+  }
+
   const secret = process.env.CRON_SECRET;
-  return `${proxy}?secret=${secret}&url=${encodeURIComponent(url)}`;
+  if (secret) {
+    headers.authorization = `Bearer ${secret}`;
+  }
+
+  return {
+    url: `${proxy}?url=${encodeURIComponent(url)}`,
+    headers,
+  };
 }
 
 function sleep(ms: number): Promise<void> {
@@ -176,11 +193,12 @@ function parseRedditPost(d: Record<string, unknown>): RedditPost | null {
 
 async function fetchListing(url: string, label: string): Promise<FetchResult> {
   let sawRateLimit = false;
+  const target = buildFetchTarget(url);
 
   for (let attempt = 0; attempt <= MAX_RATE_LIMIT_RETRIES; attempt++) {
     try {
-      const res = await fetch(proxyUrl(url), {
-        headers: { "User-Agent": REDDIT_USER_AGENT },
+      const res = await fetch(target.url, {
+        headers: target.headers,
         signal: AbortSignal.timeout(15_000),
       });
 

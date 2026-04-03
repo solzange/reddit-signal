@@ -1,5 +1,5 @@
 import { createAdminClient } from "@/lib/supabase/admin";
-import { FEED_SIZE } from "@/lib/signal/config";
+import { FEED_SIZE, WINDOW_HOURS } from "@/lib/signal/config";
 import { getSignalConfig } from "@/signal.config";
 
 const config = getSignalConfig();
@@ -16,11 +16,14 @@ function escapeXml(str: string): string {
 
 export async function GET() {
   const supabase = createAdminClient();
+  const liveCutoff = new Date(Date.now() - WINDOW_HOURS * 3_600_000).toISOString();
 
   const { data } = await supabase
     .from("signal_posts")
     .select("title, permalink, subreddit, author, ai_category, ai_summary, posted_at")
+    .eq("is_available", true)
     .neq("ai_quality", "LOW")
+    .gte("posted_at", liveCutoff)
     .order("display_score", { ascending: false })
     .limit(FEED_SIZE);
 

@@ -33,6 +33,7 @@ export default async function SignalPage() {
   const hasMore = false;
   let lastRefresh = currentSnapshot?.sourceLastRefresh ?? null;
   let fallbackSnapshotDate: string | null = null;
+  const emailSignupEnabled = Boolean(process.env.RESEND_API_KEY);
 
   if (items.length === 0) {
     const snapshot = await getLatestSignalArchiveSnapshot(supabase);
@@ -50,6 +51,7 @@ export default async function SignalPage() {
         initialNextPage={hasMore ? 2 : null}
         lastRefresh={lastRefresh}
         fallbackSnapshotDate={fallbackSnapshotDate}
+        emailSignupEnabled={emailSignupEnabled}
       />
     </Suspense>
   );

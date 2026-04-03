@@ -72,6 +72,7 @@ interface Props {
   lastRefresh: string | null;
   archiveDate?: string;
   fallbackSnapshotDate?: string | null;
+  emailSignupEnabled?: boolean;
 }
 
 export function SignalClient({
@@ -80,6 +81,7 @@ export function SignalClient({
   lastRefresh,
   archiveDate,
   fallbackSnapshotDate,
+  emailSignupEnabled = false,
 }: Props) {
   const [posts, setPosts] = useState<SignalPost[]>(initialPosts);
   const [nextPage, setNextPage] = useState<number | null>(initialNextPage);
@@ -228,7 +230,7 @@ export function SignalClient({
       </div>
 
       {/* Email signup */}
-      {!archiveDate && <EmailSignup />}
+      {!archiveDate && emailSignupEnabled && <EmailSignup />}
 
       {/* Posts */}
       {posts.length === 0 ? (
