@@ -1,0 +1,15 @@
+name = "signal-orchestrator"
+main = "src/index.ts"
+compatibility_date = "2026-04-01"
+
+[triggers]
+crons = ["*/15 * * * *"]
+
+[[queues.producers]]
+binding = "SIGNAL_QUEUE"
+queue = "signal-pipeline"
+
+[[queues.consumers]]
+queue = "signal-pipeline"
+max_batch_size = 1
+max_batch_timeout = 5
