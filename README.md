@@ -2,7 +2,7 @@
 
 Your own AI-curated Reddit feed for any topic. Self-hosted on Cloudflare Workers + Supabase + Vercel (all free tier). Optional AI scoring via any LLM.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsolzange%2Freddit-signal&env=NEXT_PUBLIC_SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY,CRON_SECRET&envDescription=Required%20environment%20variables%20for%20reddit-signal&envLink=https%3A%2F%2Fgithub.com%2Fsolzange%2Freddit-signal%234-set-up-environment&project-name=reddit-signal)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsolzange%2Freddit-signal&env=NEXT_PUBLIC_SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY,CRON_SECRET,REDDIT_PROXY_URL,NEXT_PUBLIC_SITE_URL&envDescription=Required%20environment%20variables%20for%20reddit-signal&envLink=https%3A%2F%2Fgithub.com%2Fsolzange%2Freddit-signal%234-set-up-environment&project-name=reddit-signal)
 
 **[See it live](https://promptbook.gg/signal)** — a vibecoding news feed powered by reddit-signal.
 
@@ -85,10 +85,21 @@ Penalize: hype, speculation, product launches without technical depth.`,
 cp .env.example .env
 ```
 
-Fill in at minimum:
+Fill in these required env vars:
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `CRON_SECRET` (any random string)
+- `REDDIT_PROXY_URL`
+- `NEXT_PUBLIC_SITE_URL`
+
+Optional env vars:
+- `AI_API_KEY`
+- `AI_MODEL`
+- `RESEND_API_KEY`
+- `RESEND_FROM_EMAIL`
+- `SIGNAL_ALERT_EMAIL`
+- `UPSTASH_REDIS_REST_URL`
+- `UPSTASH_REDIS_REST_TOKEN`
 
 ### 5. Deploy Cloudflare Workers
 
@@ -98,6 +109,9 @@ Reddit blocks requests from cloud IPs (Vercel, AWS). The reddit-proxy worker rou
 # Install wrangler if you haven't
 npm i -g wrangler
 wrangler login
+
+# Create the queue used by the orchestrator
+wrangler queues create signal-pipeline
 
 # Deploy the Reddit proxy
 cd workers/reddit-proxy
@@ -137,7 +151,7 @@ Set `AI_API_KEY` and optionally `AI_MODEL` in your environment. Defaults to Clau
 
 ### Email digest
 
-Set `RESEND_API_KEY` and `RESEND_FROM_EMAIL`. The weekly digest runs via `/api/cron/signal-digest` — trigger it with a Vercel cron or another Cloudflare Worker.
+Set `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, and `NEXT_PUBLIC_SITE_URL`. The weekly digest runs via `/api/cron/signal-digest` — trigger it with a Vercel cron or another Cloudflare Worker.
 
 ### Upstash Redis
 
