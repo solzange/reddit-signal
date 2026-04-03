@@ -2,7 +2,11 @@
 
 Your own AI-curated Reddit feed for any topic. Self-hosted on Cloudflare Workers + Supabase + Vercel (all free tier). Optional AI scoring via any LLM.
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsolzange%2Freddit-signal&env=NEXT_PUBLIC_SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY,CRON_SECRET&envDescription=Required%20environment%20variables%20for%20reddit-signal&envLink=https%3A%2F%2Fgithub.com%2Fsolzange%2Freddit-signal%234-set-up-environment&project-name=reddit-signal)
+
 **[See it live](https://promptbook.gg/signal)** — a vibecoding news feed powered by reddit-signal.
+
+![reddit-signal feed](screenshot.png)
 
 ## What it does
 
@@ -179,6 +183,12 @@ supabase/
 | AI scoring (optional) | ~$1-2/month | Claude Haiku 4.5 |
 
 Without AI scoring, the total cost is **$0/month**.
+
+## Like it?
+
+If reddit-signal is useful to you, a star helps others find it.
+
+[![GitHub stars](https://img.shields.io/github/stars/solzange/reddit-signal?style=social)](https://github.com/solzange/reddit-signal)
 
 ## License
 
