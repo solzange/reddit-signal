@@ -1,6 +1,6 @@
-# reddit-signal
+<a href="https://promptbook.gg/zange" target="_blank" rel="noopener"><img align="right" width="360" alt="Built by @zange on Promptbook — see what I've shipped" src="https://promptbook.gg/api/badge/zange.svg"></a>
 
-[![Promptbook](https://promptbook.gg/api/badge/zange.svg)](https://promptbook.gg/zange)
+# reddit-signal
 
 Your own AI-curated Reddit feed for any topic. Self-hosted on Cloudflare Workers + Supabase + Vercel (all free tier). Optional AI scoring via any LLM.
 
