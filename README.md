@@ -1,4 +1,4 @@
-<a href="https://promptbook.gg/zange" target="_blank" rel="noopener"><img align="right" width="360" alt="Built by @zange on Promptbook — see what I've shipped" src="https://promptbook.gg/api/badge/zange.svg"></a>
+<a href="https://promptbook.gg/zange" target="_blank" rel="noopener"><img align="right" width="360" alt="Built by @zange on Promptbook — see what I've shipped" src="https://promptbook.gg/api/badge/zange.svg?v=2"></a>
 
 # reddit-signal
 
