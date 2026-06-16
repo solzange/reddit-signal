@@ -1,5 +1,7 @@
 # reddit-signal
 
+[![Promptbook](https://promptbook.gg/api/badge/zange.svg)](https://promptbook.gg/zange)
+
 Your own AI-curated Reddit feed for any topic. Self-hosted on Cloudflare Workers + Supabase + Vercel (all free tier). Optional AI scoring via any LLM.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsolzange%2Freddit-signal&env=NEXT_PUBLIC_SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY,CRON_SECRET,REDDIT_PROXY_URL,NEXT_PUBLIC_SITE_URL&envDescription=Required%20environment%20variables%20for%20reddit-signal&envLink=https%3A%2F%2Fgithub.com%2Fsolzange%2Freddit-signal%234-set-up-environment&project-name=reddit-signal)
